@@ -94,7 +94,18 @@ height = 20.0
 script = ExtResource("1_4j3pd")
 
 [node name="Dust" type="CPUParticles2D" parent="."]
+position = Vector2(0, 11)
 emitting = false
+amount = 3
+lifetime = 0.35
+speed_scale = 1.6
+randomness = 0.2
+gravity = Vector2(0, -98)
+angular_velocity_max = 4.0
+linear_accel_max = 40.0
+scale_amount_min = 0.8
+scale_amount_max = 4.0
+color = Color(1, 1, 1, 0.745098)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1x86i")

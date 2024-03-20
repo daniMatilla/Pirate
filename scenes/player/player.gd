@@ -4,7 +4,8 @@ const SPEED = 100
 const GRAVITY = 64 * 9.8
 const JUMP_HEIGHT = .35
 const CAST_WALL = 10
-const BOUNDING_JUMP = (GRAVITY * JUMP_HEIGHT) / 2
+const JUMP_FORCE = GRAVITY * JUMP_HEIGHT
+const JUMP_BOUNDING = JUMP_FORCE / 2
 
 @onready var sprite = $Sprite
 @onready var jump_sound = $JumpSound
@@ -43,15 +44,15 @@ func animation_ctrl(axis: Vector2):
 
 func wall_jump():
 	var collider = ray_cast.get_collider()
-	
+
 	if collider.is_in_group("wall") and is_jump:
 		jump_sound.play()
-		velocity.y -= BOUNDING_JUMP
+		velocity.y -= JUMP_FORCE
 		if sprite.flip_h:
-			velocity.x += BOUNDING_JUMP
+			velocity.x += JUMP_BOUNDING
 			sprite.flip_h = false
 		else:
-			velocity.x -= BOUNDING_JUMP
+			velocity.x -= JUMP_BOUNDING
 			sprite.flip_h = true
 
 func _ready():
@@ -60,18 +61,18 @@ func _ready():
 func _physics_process(delta):
 	velocity.y += GRAVITY * delta
 	var axis = GLOBAL.get_axis()
-	
+
 	motion_ctrl(axis)
 	animation_ctrl(axis)
-	
+
 	move_and_slide()
-	
+
 func _input(event):
 	is_jump = event.is_action_pressed("ui_accept")
-	
+
 	if is_on_floor() and is_jump:
 		jump_sound.play()
-		velocity.y -= GRAVITY * JUMP_HEIGHT
+		velocity.y -= JUMP_FORCE
 	elif ray_cast.is_colliding():
 		can_move = false
 		wall_jump()
