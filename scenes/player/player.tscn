@@ -93,6 +93,9 @@ height = 20.0
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_4j3pd")
 
+[node name="Dust" type="CPUParticles2D" parent="."]
+emitting = false
+
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1x86i")
 animation = &"idle"
@@ -106,3 +109,7 @@ shape = SubResource("CapsuleShape2D_ttevs")
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_k6gia")
 volume_db = -10.0
+
+[node name="RayCast" type="RayCast2D" parent="."]
+rotation = -1.5708
+target_position = Vector2(0, 0)

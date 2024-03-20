@@ -568,7 +568,7 @@ motion_mirroring = Vector2(384, 0)
 texture = ExtResource("5_1n17w")
 centered = false
 
-[node name="Platfoms" type="TileMap" parent="."]
+[node name="Platfoms" type="TileMap" parent="." groups=["wall"]]
 position = Vector2(0, -8)
 tile_set = SubResource("TileSet_cki1o")
 rendering_quadrant_size = 32
