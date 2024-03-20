@@ -88,7 +88,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ttevs"]
 radius = 8.0
-height = 24.0
+height = 20.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_4j3pd")
@@ -100,6 +100,7 @@ frame = 4
 frame_progress = 0.705866
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_ttevs")
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]

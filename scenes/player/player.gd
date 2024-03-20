@@ -4,55 +4,47 @@ extends CharacterBody2D
 @onready var jump_sound = $JumpSound
 @onready var screen_size = get_viewport_rect().size
 
-var axis: Vector2
-var can_jump
-
 const SPEED = 100
 const GRAVITY = 70 * 9.8
 const JUMP = .32
 
-func motion_ctrl():
-	if axis == Vector2.ZERO:
-		velocity.x = 0
-	else:
-		velocity.x = axis.x * SPEED
-	
-	position.x = clamp(position.x, 0, screen_size.x)
-	position.y = clamp(position.y, 0, screen_size.y)
+func motion_ctrl(axis: Vector2):
+	velocity.x = axis.x * SPEED if (axis != Vector2.ZERO) else 0.0
 	pass
 
-func animation_ctrl():
-	if axis.x == 1:
-		sprite.animation = "run"
-		sprite.flip_h = false
-	elif axis.x == - 1:
-		sprite.animation = "run"
-		sprite.flip_h = true
+func animation_ctrl(axis: Vector2):
+	if is_on_floor():
+		if axis.x == 0:
+			sprite.animation = "idle"
+		else:
+			sprite.animation = "run"
+			sprite.flip_h = axis.x != 1
 	else:
-		sprite.animation = "idle"
+		if velocity.y < 0:
+			sprite.animation = "jump"
+		else:
+			sprite.animation = "fall"
 	pass
 
 func _ready():
 	sprite.animation = "idle"
-	sprite.play()	
+	sprite.play()
 	pass
 
-func _physics_process(delta):	
-	can_jump = is_on_floor()
-	axis = GLOBAL.get_axis()	
+func _physics_process(delta):
 	velocity.y += GRAVITY * delta
+	var axis = GLOBAL.get_axis()
 	
-	motion_ctrl()
-	animation_ctrl()
+	motion_ctrl(axis)
+	animation_ctrl(axis)
 	
 	move_and_slide()
 	pass
 	
 func _input(event):
-	var action_jump = event.is_action_pressed("ui_accept")
+	var event_jump = event.is_action_pressed("ui_accept")
 	
-	if action_jump && can_jump:
-		velocity.y -= GRAVITY * JUMP
-		sprite.animation = "jump"
+	if event_jump and is_on_floor():
+		velocity.y -= GRAVITY * JUMP		
 		jump_sound.play()
 	pass
