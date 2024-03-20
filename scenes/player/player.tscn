@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cy1tmnp05c41p"]
+[gd_scene load_steps=20 format=3 uid="uid://cy1tmnp05c41p"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_4j3pd"]
 [ext_resource type="Texture2D" uid="uid://1ovd1tve6fn8" path="res://sprites/player/fall/Fall 01.png" id="1_ytolu"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://d4k18t4im8app" path="res://sprites/player/run/Run 04.png" id="13_uuoh6"]
 [ext_resource type="Texture2D" uid="uid://qjgxlpp7la8y" path="res://sprites/player/run/Run 05.png" id="14_57hwj"]
 [ext_resource type="Texture2D" uid="uid://bn3p0wl8vubfy" path="res://sprites/player/run/Run 06.png" id="15_gg3ji"]
+[ext_resource type="AudioStream" uid="uid://tmkqtycxoy56" path="res://sounds/jump.wav" id="17_k6gia"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1x86i"]
 animations = [{
@@ -101,4 +102,6 @@ frame_progress = 0.705866
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ttevs")
 
-[node name="Jump" type="AudioStreamPlayer" parent="."]
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_k6gia")
+volume_db = -10.0

@@ -1,20 +1,21 @@
 extends CharacterBody2D
 
 @onready var sprite = $Sprite
-@onready var motion = Vector2.ZERO
+@onready var jump_sound = $JumpSound
 @onready var screen_size = get_viewport_rect().size
+
 var axis: Vector2
+var can_jump
 
 const SPEED = 100
-const GRAVITY = 16
-const JUMP = 64
+const GRAVITY = 70 * 9.8
+const JUMP = .32
 
 func motion_ctrl():
-	motion.y += GRAVITY
 	if axis == Vector2.ZERO:
-		motion = Vector2.ZERO
+		velocity.x = 0
 	else:
-		motion = axis * SPEED
+		velocity.x = axis.x * SPEED
 	
 	position.x = clamp(position.x, 0, screen_size.x)
 	position.y = clamp(position.y, 0, screen_size.y)
@@ -33,17 +34,25 @@ func animation_ctrl():
 
 func _ready():
 	sprite.animation = "idle"
-	sprite.play()
+	sprite.play()	
 	pass
 
-func _physics_process(delta):
-	axis = GLOBAL.get_axis()
+func _physics_process(delta):	
+	can_jump = is_on_floor()
+	axis = GLOBAL.get_axis()	
+	velocity.y += GRAVITY * delta
+	
 	motion_ctrl()
 	animation_ctrl()
-	move_and_collide(motion * delta)
+	
+	move_and_slide()
 	pass
-
+	
 func _input(event):
-	if event.is_action_pressed("ui_accept"):
+	var action_jump = event.is_action_pressed("ui_accept")
+	
+	if action_jump && can_jump:
+		velocity.y -= GRAVITY * JUMP
 		sprite.animation = "jump"
+		jump_sound.play()
 	pass
