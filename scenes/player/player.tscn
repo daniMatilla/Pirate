@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://d4k18t4im8app" path="res://sprites/player/run/Run 04.png" id="13_uuoh6"]
 [ext_resource type="Texture2D" uid="uid://qjgxlpp7la8y" path="res://sprites/player/run/Run 05.png" id="14_57hwj"]
 [ext_resource type="Texture2D" uid="uid://bn3p0wl8vubfy" path="res://sprites/player/run/Run 06.png" id="15_gg3ji"]
-[ext_resource type="AudioStream" uid="uid://tmkqtycxoy56" path="res://sounds/jump.wav" id="17_k6gia"]
+[ext_resource type="AudioStream" uid="uid://b03gudkau7xjq" path="res://sounds/jump.wav" id="17_k6gia"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1x86i"]
 animations = [{
