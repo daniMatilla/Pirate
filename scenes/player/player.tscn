@@ -26,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://e06tccpcuutw" path="res://sprites/player/attack 3/Attack 3 01.png" id="23_swryk"]
 [ext_resource type="Texture2D" uid="uid://c0pxmja762q0i" path="res://sprites/player/attack 3/Attack 3 02.png" id="24_i1t3a"]
 [ext_resource type="Texture2D" uid="uid://4fmvv2etllyb" path="res://sprites/player/attack 3/Attack 3 03.png" id="25_bqcfw"]
-[ext_resource type="AudioStream" uid="uid://di6b00oge1meb" path="res://sounds/hit.wav" id="27_aheob"]
+[ext_resource type="AudioStream" uid="uid://di6b00oge1meb" path="res://sounds/attack.wav" id="27_aheob"]
 
 [sub_resource type="Animation" id="Animation_hjosu"]
 resource_name = "attack_1"
@@ -187,6 +187,8 @@ animation = &"run"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t8gbg"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j6at2"]
+switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n7kp7"]
 switch_mode = 2
@@ -201,12 +203,14 @@ switch_mode = 2
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ms4dr"]
+switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_iosk4"]
 states/End/position = Vector2(-51, 93.625)
 states/Start/position = Vector2(-52.375, -9.78809)
 states/attack_1/node = SubResource("AnimationNodeAnimation_48nub")
-states/attack_1/position = Vector2(132.5, 565.656)
+states/attack_1/position = Vector2(132.5, 565.645)
 states/attack_2/node = SubResource("AnimationNodeAnimation_daork")
 states/attack_2/position = Vector2(346.445, 565.645)
 states/attack_3/node = SubResource("AnimationNodeAnimation_c81o2")
@@ -220,7 +224,7 @@ states/jump/position = Vector2(347.668, 105.164)
 states/run/node = SubResource("AnimationNodeAnimation_6pnr4")
 states/run/position = Vector2(574.992, 333.848)
 transitions = ["idle", "run", SubResource("AnimationNodeStateMachineTransition_74j73"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_l81qv"), "idle", "fall", SubResource("AnimationNodeStateMachineTransition_fof2q"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_1fkec"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_t3kqm"), "idle", "attack_1", SubResource("AnimationNodeStateMachineTransition_t8gbg"), "attack_2", "attack_3", SubResource("AnimationNodeStateMachineTransition_j6at2"), "attack_1", "idle", SubResource("AnimationNodeStateMachineTransition_n7kp7"), "attack_2", "idle", SubResource("AnimationNodeStateMachineTransition_scqh7"), "attack_3", "idle", SubResource("AnimationNodeStateMachineTransition_i5plk"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_rmnek"), "attack_1", "attack_2", SubResource("AnimationNodeStateMachineTransition_ms4dr")]
-graph_offset = Vector2(-136, -70)
+graph_offset = Vector2(-136, 248.991)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jus0f"]
 size = Vector2(14, 20)
@@ -243,10 +247,9 @@ scale_amount_max = 4.0
 color = Color(1, 1, 1, 0.745098)
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_1uty4")
+texture = ExtResource("25_bqcfw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-deterministic = true
 libraries = {
 "": SubResource("AnimationLibrary_56qhh")
 }
@@ -268,7 +271,7 @@ shape = SubResource("RectangleShape2D_jus0f")
 stream = ExtResource("17_k6gia")
 volume_db = -10.0
 
-[node name="Hit" type="AudioStreamPlayer" parent="Sounds"]
+[node name="Attack" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("27_aheob")
 
 [node name="RayCasts" type="Marker2D" parent="."]
@@ -280,5 +283,4 @@ target_position = Vector2(11, 0)
 
 [node name="RayEnemy" type="RayCast2D" parent="RayCasts"]
 position = Vector2(0, 4)
-enabled = false
-target_position = Vector2(22, 0)
+target_position = Vector2(26, 0)

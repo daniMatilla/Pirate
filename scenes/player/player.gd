@@ -10,7 +10,7 @@ const GRAP_FORCE = GRAVITY / 100
 @onready var sprite = $Sprite
 @onready var animation_tree = $AnimationTree
 @onready var jump_sound = $Sounds/Jump
-@onready var hit_sound = $Sounds/Hit
+@onready var attack_sound = $Sounds/Attack
 @onready var dust = $Dust
 @onready var ray_wall = $RayCasts/RayWall
 @onready var ray_eneny = $RayCasts/RayEnemy
@@ -21,13 +21,14 @@ var can_move: bool
 var axis: Vector2
 
 var pressed_jump: bool
+var pressed_attack: bool
 
 func _ready():
 	playback = animation_tree.get("parameters/playback")
 	playback.start("idle")
 	animation_tree.active = true
 
-func _physics_process(delta):
+func _process(delta):
 	velocity.y += GRAVITY * delta
 	axis = GLOBAL.get_axis()
 
@@ -35,30 +36,22 @@ func _physics_process(delta):
 	animation_ctrl()
 	attack_ctrl()
 
-	move_and_slide()
-
-func kill_enemy():
-	var collider = ray_eneny.get_collider()
-
-	if collider != null and collider.is_in_group("enemy"):
-		collider.queue_free()
-
 func attack_ctrl():
-	if is_on_floor() and Input.is_action_pressed("attack"):
-		match playback.get_current_node():
-			"idle", "run":
-				playback.travel("attack_1")
-				hit_sound.play()
-			"attack_1":
-				playback.travel("attack_2")
-				hit_sound.play()
-			"attack_2":
-				playback.travel("attack_3")
-				hit_sound.play()
+	var enemy = ray_eneny.get_collider()
 
-	ray_eneny.enabled = playback.get_current_node() in ["attack_1", "attack_2", "attack_3"]
-	if ray_eneny.is_colliding():
-		kill_enemy()
+	if is_on_floor():
+		if axis.x == 0 and pressed_attack:
+			match playback.get_current_node():
+				"idle":
+					playback.travel("attack_1")
+				"attack_1":
+					playback.travel("attack_2")
+				"attack_2":
+					playback.travel("attack_3")
+
+			if ray_eneny.is_colliding():
+				if enemy.is_in_group("enemy"):
+					enemy.damage()
 
 func animation_ctrl():
 	dust.emitting = false
@@ -80,6 +73,7 @@ func motion_ctrl():
 	if is_on_floor():
 		can_move = true
 		if pressed_jump:
+			can_move = false
 			jump_sound.play()
 			velocity.y -= JUMP_FORCE
 	else:
@@ -88,14 +82,17 @@ func motion_ctrl():
 			can_move = false
 			wall_jump()
 
-func wall_jump():
-	var collider = ray_wall.get_collider()
+	move_and_slide()
 
-	if collider.is_in_group("wall"):
+func wall_jump():
+	var wall = ray_wall.get_collider()
+
+	if wall.is_in_group("wall"):
 		velocity.y = GRAP_FORCE
 		if pressed_jump:
 			jump_sound.play()
 			velocity.y = -JUMP_FORCE
+
 			if sprite.flip_h:
 				velocity.x += JUMP_BOUNDING
 				sprite.flip_h = false
@@ -107,3 +104,4 @@ func wall_jump():
 
 func _input(event):
 	pressed_jump = event.is_action_pressed("ui_accept")
+	pressed_attack = event.is_action_pressed("attack")

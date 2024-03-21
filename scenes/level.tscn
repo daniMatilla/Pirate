@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cy1tmnp05c41p" path="res://scenes/player/player.tscn" id="8_0mfl8"]
 [ext_resource type="PackedScene" uid="uid://fcnb327hdw4d" path="res://scenes/camera/camera.tscn" id="9_ck5ji"]
 [ext_resource type="AudioStream" uid="uid://r71tkw368cv7" path="res://sounds/ambience.ogg" id="10_fnpgw"]
-[ext_resource type="PackedScene" uid="uid://dnp7wdqnn1uq1" path="res://scenes/enemies/shark/shark.tscn" id="11_m58wu"]
+[ext_resource type="PackedScene" uid="uid://dnp7wdqnn1uq1" path="res://scenes/enemies/shark.tscn" id="11_m58wu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yn5i1"]
 texture = ExtResource("6_hclm1")
@@ -594,4 +594,4 @@ position = Vector2(17, 44)
 [node name="Camera" parent="." instance=ExtResource("9_ck5ji")]
 
 [node name="Shark" parent="." instance=ExtResource("11_m58wu")]
-position = Vector2(240, 139)
+position = Vector2(240, 124)
