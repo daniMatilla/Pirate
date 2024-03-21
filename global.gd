@@ -1,5 +1,7 @@
 extends Node
 
+const GRAVITY = 64 * 9.8
+
 @onready var score: int
 @onready var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 

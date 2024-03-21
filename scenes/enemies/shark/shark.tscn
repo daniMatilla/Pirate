@@ -1,0 +1,51 @@
+[gd_scene load_steps=13 format=3 uid="uid://dnp7wdqnn1uq1"]
+
+[ext_resource type="Script" path="res://scenes/enemies/shark/shark.gd" id="1_67y0m"]
+[ext_resource type="Texture2D" uid="uid://dlqtxborqsv1g" path="res://sprites/enemy/shark/idle/Idle 01.png" id="2_xtq2d"]
+[ext_resource type="Texture2D" uid="uid://ca2a3gxvwqsia" path="res://sprites/enemy/shark/idle/Idle 02.png" id="3_a11pw"]
+[ext_resource type="Texture2D" uid="uid://l1qynylxkjaw" path="res://sprites/enemy/shark/idle/Idle 03.png" id="4_80lj5"]
+[ext_resource type="Texture2D" uid="uid://dyge7ubmx05aq" path="res://sprites/enemy/shark/idle/Idle 04.png" id="5_t6ax8"]
+[ext_resource type="Texture2D" uid="uid://p8mtsc1mtw4l" path="res://sprites/enemy/shark/idle/Idle 05.png" id="6_y6kku"]
+[ext_resource type="Texture2D" uid="uid://3lxe0tthu7jj" path="res://sprites/enemy/shark/idle/Idle 06.png" id="7_lg7yf"]
+[ext_resource type="Texture2D" uid="uid://cg53pmxhcsi0w" path="res://sprites/enemy/shark/idle/Idle 07.png" id="8_dd6gp"]
+[ext_resource type="Texture2D" uid="uid://dsls5hdcp4hvx" path="res://sprites/enemy/shark/idle/Idle 08.png" id="9_3gjgq"]
+
+[sub_resource type="Animation" id="Animation_64lbu"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_xtq2d"), ExtResource("3_a11pw"), ExtResource("4_80lj5"), ExtResource("5_t6ax8"), ExtResource("6_y6kku"), ExtResource("7_lg7yf"), ExtResource("8_dd6gp"), ExtResource("9_3gjgq")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fyrxf"]
+_data = {
+"idle": SubResource("Animation_64lbu")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_br4ti"]
+size = Vector2(16, 22)
+
+[node name="Shark" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_67y0m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xtq2d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fyrxf")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_br4ti")

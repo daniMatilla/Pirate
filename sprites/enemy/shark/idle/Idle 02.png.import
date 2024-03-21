@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l1qynylxkjaw"
-path="res://.godot/imported/Idle 03.png-6fa2d0a0b860d0469d7b077a295c75e5.ctex"
+uid="uid://ca2a3gxvwqsia"
+path="res://.godot/imported/Idle 02.png-d30a4a6be75ed0039324ec58dd6fb71d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/enemy/idle/Idle 03.png"
-dest_files=["res://.godot/imported/Idle 03.png-6fa2d0a0b860d0469d7b077a295c75e5.ctex"]
+source_file="res://sprites/enemy/shark/idle/Idle 02.png"
+dest_files=["res://.godot/imported/Idle 02.png-d30a4a6be75ed0039324ec58dd6fb71d.ctex"]
 
 [params]
 
