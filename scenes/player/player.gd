@@ -30,10 +30,12 @@ func _ready():
 func _physics_process(delta):
 	velocity.y += GRAVITY * delta
 	axis = GLOBAL.get_axis()
- 
+
 	motion_ctrl()
 	animation_ctrl()
 	attack_ctrl()
+
+	move_and_slide()
 
 func kill_enemy():
 	var collider = ray_eneny.get_collider()
@@ -69,9 +71,9 @@ func animation_ctrl():
 			sprite.flip_h = axis.x != 1
 	else:
 		playback.travel("jump" if velocity.y < 0 else "fall")
+		ray_casts.scale.x = -1 if sprite.flip_h else 1
 
 func motion_ctrl():
-	ray_casts.scale.x = -1 if sprite.flip_h else 1
 	if can_move:
 		velocity.x = axis.x * SPEED
 
@@ -85,8 +87,6 @@ func motion_ctrl():
 		if ray_wall.is_colliding():
 			can_move = false
 			wall_jump()
-
-	move_and_slide()
 
 func wall_jump():
 	var collider = ray_wall.get_collider()
@@ -102,7 +102,7 @@ func wall_jump():
 			else:
 				velocity.x -= JUMP_BOUNDING
 				sprite.flip_h = true
-	
+
 	ray_wall.enabled = false
 
 func _input(event):
