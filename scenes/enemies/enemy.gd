@@ -9,8 +9,9 @@ const GRAVITY = GLOBAL.GRAVITY
 func _ready():
 	animation.play("idle")
 
-func _process(_delta):
-	velocity.y += GRAVITY
+func _process(delta):
+	velocity.y += GRAVITY * delta
+	move_and_slide()
 
 	if health <= 0:
 		queue_free()
