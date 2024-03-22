@@ -1,8 +1,9 @@
-[gd_scene load_steps=57 format=3 uid="uid://cy1tmnp05c41p"]
+[gd_scene load_steps=58 format=3 uid="uid://cy1tmnp05c41p"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_4j3pd"]
 [ext_resource type="Texture2D" uid="uid://1ovd1tve6fn8" path="res://sprites/player/fall/Fall 01.png" id="1_ytolu"]
 [ext_resource type="Texture2D" uid="uid://dt7557ainutmv" path="res://sprites/player/idle/Idle 01.png" id="2_1uty4"]
+[ext_resource type="PackedScene" uid="uid://bc6nhk3k6b2e1" path="res://scenes/player/totem/totem.tscn" id="2_n0fr3"]
 [ext_resource type="Texture2D" uid="uid://bx75fm6yv6he4" path="res://sprites/player/idle/Idle 02.png" id="3_ujl47"]
 [ext_resource type="Texture2D" uid="uid://dkufcnni8s426" path="res://sprites/player/idle/Idle 03.png" id="4_dmn4d"]
 [ext_resource type="Texture2D" uid="uid://bx4wlq0gtshap" path="res://sprites/player/idle/Idle 04.png" id="5_8pbon"]
@@ -17,7 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://qjgxlpp7la8y" path="res://sprites/player/run/Run 05.png" id="14_57hwj"]
 [ext_resource type="Texture2D" uid="uid://bn3p0wl8vubfy" path="res://sprites/player/run/Run 06.png" id="15_gg3ji"]
 [ext_resource type="Texture2D" uid="uid://cxbq3hhpvhoj0" path="res://sprites/player/attack 1/Attack 1 01.png" id="17_3rysl"]
-[ext_resource type="AudioStream" uid="uid://b03gudkau7xjq" path="res://sounds/jump.wav" id="17_k6gia"]
 [ext_resource type="Texture2D" uid="uid://cq7a6cf00na53" path="res://sprites/player/attack 1/Attack 1 02.png" id="18_dlur4"]
 [ext_resource type="Texture2D" uid="uid://drq00f2wd4e4w" path="res://sprites/player/attack 1/Attack 1 03.png" id="19_8ontu"]
 [ext_resource type="Texture2D" uid="uid://jltub447lh73" path="res://sprites/player/attack 2/Attack 2 01.png" id="20_sjspt"]
@@ -26,7 +26,8 @@
 [ext_resource type="Texture2D" uid="uid://e06tccpcuutw" path="res://sprites/player/attack 3/Attack 3 01.png" id="23_swryk"]
 [ext_resource type="Texture2D" uid="uid://c0pxmja762q0i" path="res://sprites/player/attack 3/Attack 3 02.png" id="24_i1t3a"]
 [ext_resource type="Texture2D" uid="uid://4fmvv2etllyb" path="res://sprites/player/attack 3/Attack 3 03.png" id="25_bqcfw"]
-[ext_resource type="AudioStream" uid="uid://di6b00oge1meb" path="res://sounds/attack.wav" id="27_aheob"]
+[ext_resource type="AudioStream" uid="uid://77dtc5vkkd22" path="res://sounds/jump.ogg" id="26_g4ysl"]
+[ext_resource type="AudioStream" uid="uid://c4e6p3osw40bh" path="res://sounds/sword.ogg" id="27_vcsic"]
 
 [sub_resource type="Animation" id="Animation_hjosu"]
 resource_name = "attack_1"
@@ -57,6 +58,21 @@ tracks/1/keys = {
 "method": &"attack_ctrl"
 }]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Effects")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0941129,
+"start_offset": 0.0,
+"stream": ExtResource("27_vcsic")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_dw8c6"]
 resource_name = "attack_2"
@@ -87,6 +103,21 @@ tracks/1/keys = {
 "method": &"attack_ctrl"
 }]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Effects")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0951947,
+"start_offset": 0.0,
+"stream": ExtResource("27_vcsic")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_jawi6"]
 resource_name = "attack_3"
@@ -117,6 +148,21 @@ tracks/1/keys = {
 "method": &"attack_ctrl"
 }]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Effects")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0923026,
+"start_offset": 0.0,
+"stream": ExtResource("27_vcsic")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_0gm50"]
 resource_name = "fall"
@@ -166,6 +212,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("7_jxxk1"), ExtResource("8_j30ph"), ExtResource("9_pgu0r")]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Effects")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("26_g4ysl")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_vjtdl"]
 resource_name = "run"
@@ -273,6 +334,7 @@ size = Vector2(14, 20)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_4j3pd")
+totem = ExtResource("2_n0fr3")
 
 [node name="Dust" type="CPUParticles2D" parent="."]
 position = Vector2(0, 11)
@@ -289,7 +351,7 @@ scale_amount_max = 4.0
 color = Color(1, 1, 1, 0.745098)
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("23_swryk")
+texture = ExtResource("9_pgu0r")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -307,14 +369,8 @@ anim_player = NodePath("../AnimationPlayer")
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_jus0f")
 
-[node name="Sounds" type="Node" parent="."]
-
-[node name="Jump" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("17_k6gia")
+[node name="Effects" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0
-
-[node name="Attack" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("27_aheob")
 
 [node name="RayCasts" type="Marker2D" parent="."]
 
@@ -325,4 +381,4 @@ target_position = Vector2(11, 0)
 
 [node name="RayEnemy" type="RayCast2D" parent="RayCasts"]
 position = Vector2(0, 4)
-target_position = Vector2(26, 0)
+target_position = Vector2(28, 0)

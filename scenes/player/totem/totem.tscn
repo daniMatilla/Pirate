@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bc6nhk3k6b2e1"]
+
+[ext_resource type="Script" path="res://scenes/player/totem/totem.gd" id="1_qyri7"]
+[ext_resource type="PackedScene" uid="uid://ctk4hr66ohlwa" path="res://scenes/player/totem/shoot.tscn" id="2_s3qu1"]
+[ext_resource type="Texture2D" uid="uid://bcbxrjh0ll6gd" path="res://sprites/player/totem/attack/4.png" id="5_v84t2"]
+[ext_resource type="Texture2D" uid="uid://d33ssqke0smch" path="res://sprites/player/totem/idle/1.png" id="8_ipk3p"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5nj7a"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("5_v84t2")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ipk3p")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dhkh8"]
+size = Vector2(20, 22)
+
+[node name="Totem" type="Area2D"]
+scale = Vector2(-1, 1)
+script = ExtResource("1_qyri7")
+Shoot = ExtResource("2_s3qu1")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5nj7a")
+animation = &"attack"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(3, 5)
+shape = SubResource("RectangleShape2D_dhkh8")
+
+[node name="ShootSpawn" type="Marker2D" parent="."]
+position = Vector2(-11, 10)

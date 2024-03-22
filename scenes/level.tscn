@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://6nh7iswseanb"]
+[gd_scene load_steps=16 format=3 uid="uid://6nh7iswseanb"]
 
 [ext_resource type="Texture2D" uid="uid://p3y4hn34shvh" path="res://sprites/background/plx-1.png" id="1_kfkb8"]
 [ext_resource type="Texture2D" uid="uid://b5jgq2dw6da0s" path="res://sprites/background/plx-2.png" id="2_s3xki"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cy1tmnp05c41p" path="res://scenes/player/player.tscn" id="8_0mfl8"]
 [ext_resource type="PackedScene" uid="uid://fcnb327hdw4d" path="res://scenes/camera/camera.tscn" id="9_ck5ji"]
 [ext_resource type="AudioStream" uid="uid://r71tkw368cv7" path="res://sounds/ambience.ogg" id="10_fnpgw"]
+[ext_resource type="PackedScene" uid="uid://bc6nhk3k6b2e1" path="res://scenes/player/totem/totem.tscn" id="10_iytvs"]
 [ext_resource type="PackedScene" uid="uid://dnp7wdqnn1uq1" path="res://scenes/enemies/shark.tscn" id="11_m58wu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yn5i1"]
@@ -523,7 +524,7 @@ terrain_set_0/terrain_0/color = Color(0.109804, 0.466667, 0, 1)
 sources/0 = SubResource("TileSetAtlasSource_yn5i1")
 sources/1 = SubResource("TileSetAtlasSource_3psg4")
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" groups=["level"]]
 
 [node name="BgMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_fnpgw")
@@ -591,7 +592,13 @@ layer_1/tile_data = PackedInt32Array(196616, 983040, 3, 262152, 262144, 1, 32768
 [node name="Player" parent="." instance=ExtResource("8_0mfl8")]
 position = Vector2(17, 44)
 
-[node name="Camera" parent="." instance=ExtResource("9_ck5ji")]
+[node name="Totem" parent="." instance=ExtResource("10_iytvs")]
+rotation = 3.14159
+scale = Vector2(1, -1)
 
-[node name="Shark" parent="." instance=ExtResource("11_m58wu")]
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Shark" parent="Enemies" instance=ExtResource("11_m58wu")]
 position = Vector2(240, 124)
+
+[node name="Camera" parent="." instance=ExtResource("9_ck5ji")]

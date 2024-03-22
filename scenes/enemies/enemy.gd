@@ -16,6 +16,6 @@ func _process(delta):
 	if health <= 0:
 		queue_free()
 
-func damage():
-	health -= 1
-	print(health)
+func apply_damage(damage: int):
+	health -= damage
+	print("Enemy health: ", health)

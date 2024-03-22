@@ -7,10 +7,10 @@ const JUMP_FORCE = GRAVITY * JUMP_HEIGHT
 const JUMP_BOUNDING = JUMP_FORCE / 2
 const GRAP_FORCE = GRAVITY / 25
 
+@export var totem: PackedScene
+
 @onready var sprite = $Sprite
 @onready var animation_tree = $AnimationTree
-@onready var jump_sound = $Sounds/Jump
-@onready var attack_sound = $Sounds/Attack
 @onready var dust = $Dust
 @onready var ray_wall = $RayCasts/RayWall
 @onready var ray_eneny = $RayCasts/RayEnemy
@@ -39,10 +39,12 @@ func attack_ctrl():
 	var enemy = ray_eneny.get_collider()
 	if ray_eneny.is_colliding():
 		if enemy.is_in_group("enemy"):
-			enemy.damage()
+			enemy.apply_damage(3)
 
 func animation_ctrl():
 	dust.emitting = false
+	ray_casts.scale.x = -1 if sprite.flip_h else 1
+	
 	if is_on_floor():
 		if axis.x == 0:
 			playback.travel("idle")
@@ -52,7 +54,6 @@ func animation_ctrl():
 			sprite.flip_h = axis.x != 1
 	else:
 		playback.travel("jump" if velocity.y < 0 else "fall")
-		ray_casts.scale.x = -1 if sprite.flip_h else 1
 	
 	if pressed_attack:
 		match playback.get_current_node():
@@ -70,7 +71,6 @@ func motion_ctrl():
 	if is_on_floor():
 		can_move = true
 		if pressed_jump:
-			jump_sound.play()
 			velocity.y -= JUMP_FORCE
 	else:
 		ray_wall.enabled = velocity.y >= 0
@@ -86,7 +86,6 @@ func wall_jump():
 		can_move = false
 		velocity.y = GRAP_FORCE
 		if pressed_jump:
-			jump_sound.play()
 			velocity.y = -JUMP_FORCE
 
 			if sprite.flip_h:
